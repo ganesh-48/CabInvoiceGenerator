@@ -2,7 +2,6 @@ package com.cabinvoiceservice;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class CabInvoiceServiceTest {
@@ -28,11 +27,12 @@ public class CabInvoiceServiceTest {
     }
 
     @Test
-    public void givenMultipleRidesShouldReturnTotalFare() {
+    public void givenMultipleRidesShouldReturnCabInvoiceSummary() {
         Ride[] rides = { new Ride(2.0, 5),
                          new Ride(0.1, 1)
         };
-        double fare = cabInvoiceService.calculateFare(rides);
-        Assertions.assertEquals(30, fare, 0.0);
+        InvoiceSummary summary = cabInvoiceService.calculateFare(rides);
+        InvoiceSummary ecpectedInvoiceSummary = new InvoiceSummary(2, 30.0);
+        Assertions.assertEquals(ecpectedInvoiceSummary, summary);
     }
 }
