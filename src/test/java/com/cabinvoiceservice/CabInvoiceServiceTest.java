@@ -45,4 +45,13 @@ public class CabInvoiceServiceTest {
         InvoiceSummary exceptedinvoiceSummary = new InvoiceSummary(2, 30.0);
         Assertions.assertEquals(exceptedinvoiceSummary, summary);
     }
+
+    @Test
+    public void givenDistanceAndTimeShouldReturnpremiumMinFare() {
+        double distance = 0.5;
+        int time = 4;
+        CabInvoiceService invoiceGenerator = null;
+        double fare = invoiceGenerator.calculatePremiumFare(distance, time);
+        Assertions.assertEquals(20, fare, 0.0);
+    }
 }
