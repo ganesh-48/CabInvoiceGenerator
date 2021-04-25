@@ -35,4 +35,14 @@ public class CabInvoiceServiceTest {
         InvoiceSummary ecpectedInvoiceSummary = new InvoiceSummary(2, 30.0);
         Assertions.assertEquals(ecpectedInvoiceSummary, summary);
     }
+
+    @Test
+    public void givenUserIdMultipleRidesShouldReturnCabInvoiceSummary() {
+        RideRepository riderepo = new RideRepository();
+        riderepo.addRidetoUser("User", new Ride(2.0, 5));
+        riderepo.addRidetoUser("User", new Ride(0.1, 1));
+        InvoiceSummary summary = cabInvoiceService.calculateFare(riderepo.getRides("User"));
+        InvoiceSummary exceptedinvoiceSummary = new InvoiceSummary(2, 30.0);
+        Assertions.assertEquals(exceptedinvoiceSummary, summary);
+    }
 }
